@@ -16,7 +16,7 @@ func (s *Sfacg) GetAccountInApi() gjson.Result {
 	return s.get("/user", nil)
 }
 
-func (s *Sfacg) LoginApi(username, password string) *BuilderHttpClient.ResponseBuilder {
+func (s *Sfacg) LoginApi(username, password string) BuilderHttpClient.ResponseInterfaceBuilder {
 	return s.post("/sessions", &loginPayload{Username: username, Password: password})
 }
 func (s *Sfacg) SearchNovelsResultApi(keyword string, page int) gjson.Result {

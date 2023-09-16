@@ -3,7 +3,7 @@ module github.com/catnovelapi/sf
 go 1.19
 
 require (
-	github.com/catnovelapi/BuilderHttpClient v1.0.2
+	github.com/catnovelapi/BuilderHttpClient v1.0.7
 	github.com/google/uuid v1.3.1
 	github.com/tidwall/gjson v1.16.0
 )

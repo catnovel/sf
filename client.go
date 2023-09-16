@@ -55,20 +55,20 @@ func (s *Sfacg) get(endURL string, params any) gjson.Result {
 	return BuilderHttpClient.Get(s.apiBaseUrl+endURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(s.sfacgHeader())).Gjson()
 }
 
-func (s *Sfacg) post(endURL string, params any) *BuilderHttpClient.ResponseBuilder {
+func (s *Sfacg) post(endURL string, params any) BuilderHttpClient.ResponseInterfaceBuilder {
 	postHeader := s.sfacgHeader()
 	postHeader["Content-Type"] = "application/json"
-	return BuilderHttpClient.Post(s.apiBaseUrl+endURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(postHeader)).Debug()
+	return BuilderHttpClient.Post(s.apiBaseUrl+endURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(postHeader))
 }
 
-func (s *Sfacg) postWeb(endURL string, params any, notCookie bool) *BuilderHttpClient.ResponseBuilder {
+func (s *Sfacg) postWeb(endURL string, params any, notCookie bool) BuilderHttpClient.ResponseInterfaceBuilder {
 	headers := s.sfacgHeader()
 	headers["Content-Type"] = "application/json"
 	delete(headers, "SFSecurity")
 	if notCookie {
 		delete(headers, "Cookie")
 	}
-	return BuilderHttpClient.Post(s.apiBaseUrl+endURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(headers)).Debug()
+	return BuilderHttpClient.Post(s.apiBaseUrl+endURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(headers))
 }
 
 func (s *Sfacg) getWeb(webURL string, params any, notCookie bool) gjson.Result {
@@ -77,5 +77,5 @@ func (s *Sfacg) getWeb(webURL string, params any, notCookie bool) gjson.Result {
 	if notCookie {
 		delete(headers, "Cookie")
 	}
-	return BuilderHttpClient.Get(webURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(headers)).Debug().Gjson()
+	return BuilderHttpClient.Get(webURL, BuilderHttpClient.Body(params), BuilderHttpClient.Header(headers)).Gjson()
 }
