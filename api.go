@@ -102,18 +102,6 @@ func (s *Sfacg) EssayLongNovelApi(page int) gjson.Result {
 	return s.essaySolicitationNovelApi(653, page)
 }
 
-func (s *Sfacg) PostConversionsApi() gjson.Result {
-	randomBytes := make([]byte, 16)
-	_, _ = rand.Read(randomBytes)
-	return s.post("/androiddeviceinfos/conversion", putReadingTimePayload{OaID: hex.EncodeToString(randomBytes)}).Gjson()
-}
-func (s *Sfacg) VersionInformation() gjson.Result {
-	return s.post("/androidcfg", nil).Gjson()
-}
-
-func (s *Sfacg) PreOrderApi() BuilderHttpClient.ResponseInterfaceBuilder {
-	return s.post("/preOrder", map[string]any{"expand": "intro,typeName,tags,sysTags", "withExpiredPreOrder": false})
-}
 func (s *Sfacg) SystemRecommendApi() gjson.Result {
 	return s.get("/novel/systemRecommend", nil)
 }
@@ -121,6 +109,18 @@ func (s *Sfacg) SystemRecommendApi() gjson.Result {
 func (s *Sfacg) GetActConfigApi() gjson.Result {
 	return s.getWeb("https://pages.sfacg.com/api/apptabproject/getActConfig", nil, false)
 }
-func (s *Sfacg) PostSpecialPushApi() gjson.Result {
-	return s.post("/specialpush", putSignInfoPayload{SignDate: "merchPush", EntityId: "", EntityType: "novel"}).Gjson()
+func (s *Sfacg) PostConversionsApi() BuilderHttpClient.ResponseInterfaceBuilder {
+	randomBytes := make([]byte, 16)
+	_, _ = rand.Read(randomBytes)
+	return s.post("/androiddeviceinfos/conversion", putReadingTimePayload{OaID: hex.EncodeToString(randomBytes)})
+}
+func (s *Sfacg) VersionInformation() BuilderHttpClient.ResponseInterfaceBuilder {
+	return s.post("/androidcfg", nil)
+}
+func (s *Sfacg) PreOrderApi() BuilderHttpClient.ResponseInterfaceBuilder {
+
+	return s.post("/preOrder", map[string]any{"expand": "intro,typeName,tags,sysTags", "withExpiredPreOrder": false})
+}
+func (s *Sfacg) PostSpecialPushApi() BuilderHttpClient.ResponseInterfaceBuilder {
+	return s.post("/specialpush", putSignInfoPayload{SignDate: "merchPush", EntityId: "", EntityType: "novel"})
 }

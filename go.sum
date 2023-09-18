@@ -1,9 +1,5 @@
-github.com/catnovelapi/BuilderHttpClient v1.0.2 h1:PIjRMgLaDgVQ+o1AZGD08uIn5PIio3JoO1/QMkVH7oA=
-github.com/catnovelapi/BuilderHttpClient v1.0.2/go.mod h1:SxFODtM3F8qqzQeUcoSRdhS5OraQ4TGGKlHbU8KiXn0=
-github.com/catnovelapi/BuilderHttpClient v1.0.7/go.mod h1:SxFODtM3F8qqzQeUcoSRdhS5OraQ4TGGKlHbU8KiXn0=
+github.com/catnovelapi/BuilderHttpClient v1.2.4 h1:Mu+vtrR0fH32YFL/vKYZUfbYnd55jEd+xEFkvk47xhk=
 github.com/catnovelapi/BuilderHttpClient v1.2.4/go.mod h1:SxFODtM3F8qqzQeUcoSRdhS5OraQ4TGGKlHbU8KiXn0=
-github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
-github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/google/uuid v1.3.1 h1:KjJaJ9iWZ3jOFZIf1Lqf4laDRCasjl0BCmnEGxkdLb4=
 github.com/google/uuid v1.3.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/tidwall/gjson v1.16.0 h1:SyXa+dsSPpUlcwEDuKuEBJEz5vzTvOea+9rjyYodQFg=
