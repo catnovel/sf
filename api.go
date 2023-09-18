@@ -16,6 +16,10 @@ func (s *Sfacg) GetAccountInApi() gjson.Result {
 	return s.get("/user", nil)
 }
 
+func (s *Sfacg) AccountInMoneyApi() gjson.Result {
+	return s.post("/user/money", nil).Gjson()
+}
+
 func (s *Sfacg) LoginApi(username, password string) BuilderHttpClient.ResponseInterfaceBuilder {
 	return s.post("/sessions", &loginPayload{Username: username, Password: password})
 }
@@ -24,8 +28,14 @@ func (s *Sfacg) SearchNovelsResultApi(keyword string, page int) gjson.Result {
 }
 
 func (s *Sfacg) GetChapterInfoApi(chapterId any) string {
-	response := s.get(fmt.Sprintf("/Chaps/%v", chapterId), map[string]string{"expand": "content"})
-	return response.Get("data.expand.content").String()
+	for i := 0; i < 5; i++ {
+		response := s.get(fmt.Sprintf("/Chaps/%v", chapterId), map[string]string{"expand": "content"})
+		content := response.Get("data.expand.content").String()
+		if content != "" {
+			return content
+		}
+	}
+	return ""
 }
 func (s *Sfacg) ChapterListByBookIDApi(bookId any) gjson.Result {
 	return s.get(fmt.Sprintf("/novels/%s/dirs", bookId), map[string]string{"expand": "originNeedFireMoney"})
@@ -96,6 +106,20 @@ func (s *Sfacg) PostConversionsApi() gjson.Result {
 	randomBytes := make([]byte, 16)
 	_, _ = rand.Read(randomBytes)
 	return s.post("/androiddeviceinfos/conversion", putReadingTimePayload{OaID: hex.EncodeToString(randomBytes)}).Gjson()
+}
+func (s *Sfacg) VersionInformation() gjson.Result {
+	return s.post("/androidcfg", nil).Gjson()
+}
+
+func (s *Sfacg) PreOrderApi() BuilderHttpClient.ResponseInterfaceBuilder {
+	return s.post("/preOrder", map[string]any{"expand": "intro,typeName,tags,sysTags", "withExpiredPreOrder": false})
+}
+func (s *Sfacg) SystemRecommendApi() gjson.Result {
+	return s.get("/novel/systemRecommend", nil)
+}
+
+func (s *Sfacg) GetActConfigApi() gjson.Result {
+	return s.getWeb("https://pages.sfacg.com/api/apptabproject/getActConfig", nil, false)
 }
 func (s *Sfacg) PostSpecialPushApi() gjson.Result {
 	return s.post("/specialpush", putSignInfoPayload{SignDate: "merchPush", EntityId: "", EntityType: "novel"}).Gjson()
